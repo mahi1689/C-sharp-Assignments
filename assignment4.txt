@@ -1,0 +1,222 @@
+
+
+
+
+1) Print the Total price of orders which have the products supplied by 'Exotic Liquids' if the price is > 50 and also print it by Shipping company's Name
+
+select dbo.OrderItems.Unitprice,dbo.Product.Package as 'Shipping name',dbo.Product.ProductName,dbo.OrderItems.OrderId
+from dbo.Product join dbo.OrderItems
+on dbo.Product.ProductId=dbo.OrderItems.ProductId
+where dbo.Product.Package='dtdc' and dbo.OrderItems.Unitprice>30000;
+
+
+output:
+
+Unitprice	Shipping name	ProductName	OrderId
+50000.00	dtdc	Mobile	301
+96000.00	dtdc	Mobile	301
+80000.00	dtdc	Mobile	309
+50000.00	dtdc	Mobile	310
+50000.00	dtdc	Television	301
+47800.00	dtdc	Refrigerator	306
+
+
+
+
+
+
+2.Display the employee details whose joined at first
+
+select * from dbo.Customer join dbo.Orders
+on dbo.Customer.Customer_id=dbo.Orders.Customer_id
+where OrderDate<'2022-01-21 12:21:55';
+
+output:
+Customer_id	FirstName	LastName	City	Country	Phone	Fax_number	OrderId	OrderDate	OrderNumber	Customer_id	TotalAmount
+105	dhoni	ms	dublin	ireland	9453568566	NULL	302	2021-08-20 11:12:01.000	ord2	105	38000
+101	suresh	raina	Bnagalore	India	9878788888	554565899	303	2018-10-29 14:52:41.000	ord3	101	19000
+104	shikar	dhawan	sydney	australia	9454678566	NULL	304	2009-11-11 13:23:45.000	ord4	104	20000
+103	rahul	kl	buenan	argentina	9454656677	NULL	305	2019-11-09 14:23:45.000	ord5	103	78000
+102	virat	kohli	Mysuru	India	9454656677	NULL	306	2017-05-09 04:13:45.000	ord6	102	60000
+102	virat	kohli	Mysuru	India	9454656677	NULL	307	1900-01-01 00:00:00.000	ord6	102	60000
+101	suresh	raina	Bnagalore	India	9878788888	554565899	308	2018-01-21 00:00:00.000	ord1	101	38080
+
+
+
+
+
+
+
+3.employee details whose joined at recently
+
+select * from dbo.Customer join dbo.Orders
+on dbo.Customer.Customer_id=dbo.Orders.Customer_id
+where OrderDate>'2022-01-21 12:21:55';
+
+output:
+Customer_id	FirstName	LastName	City	Country	Phone	Fax_number	OrderId	OrderDate	OrderNumber	Customer_id	TotalAmount
+101	suresh	raina	Bnagalore	India	9878788888	554565899	301	2022-01-21 15:45:51.000	ord1	101	50000
+101	suresh	raina	Bnagalore	India	9878788888	554565899	309	2022-02-21 00:00:00.000	ord1	101	38080
+110	darshan	a	bengaluru	India	300074321	555674555	310	2022-02-21 12:21:55.000	ord10	110	58080
+
+
+
+
+
+
+4.Write a query to get most expense and least expensive Product list (name and unit price).
+
+select     max(dbo.Product.Unitprice) As 'Most Expensive Product',min(dbo.Product.Unitprice) As 'Least Expensive Product',dbo.Product.ProductName as 'Product Name'
+from dbo.Product
+group by dbo.Product.ProductName;
+
+output:
+
+Most Expensive Product	Least Expensive Product	Product Name
+25000.00	25000.00	Air Cooler
+70000.00	70000.00	Laptop
+40000.00	35000.00	Mobile
+50000.00	30000.00	Television
+
+
+
+
+5.Display the list of products that are out of stock
+
+select dbo.Product.ProductId, dbo.Product.ProductName from dbo.Product where IsDiscontinued=0;
+
+output:
+
+ProductId	ProductName
+201	Television
+203	Television
+205	Laptop
+
+
+
+
+
+6.Display the list of products whose unitinstock is less than unitonorder
+
+
+select  dbo.Product.ProductName,dbo.OrderItems.Quantity as 'Unit Stock' , dbo.Orders.OrderNumber as 'Unit in Order'
+from dbo.Product join dbo.OrderItems
+on dbo.Product.ProductId = dbo.OrderItems.ProductId
+join Orders
+on dbo.OrderItems.OrderId=dbo.Orders.OrderId
+where dbo.OrderItems.Quantity<dbo.Orders.OrderNumber;
+
+
+output:
+
+ProductName	Unit Stock	Unit in Order
+Mobile	100	200
+Television	1000	7000
+Laptop	500	700
+Mobile	100	20000
+Laptop	100	20000
+Mobile	2800	10000
+
+
+
+
+
+7.Display list of categories and suppliers who supply products within those categories
+
+select dbo.Product.ProductName, dbo.Product.Package as 'Suppliers'
+from dbo.Product;
+
+output:
+
+ProductName	Suppliers
+Television	dtdc
+Air Cooler	Safe express
+Television	Safe express
+Mobile	dtdc
+Laptop	Fast courier
+Mobile	dtdc
+
+
+
+
+
+
+8.Display complete list of customers, the OrderID and date of any orders they have made
+
+select dbo.Orders.OrderId, dbo.Product.ProductName,dbo.Customer.FirstName,dbo.Customer.LastName,dbo.Customer.Phone,dbo.Customer.City,dbo.Orders.OrderDate
+from dbo.Product join dbo.OrderItems
+on dbo.Product.ProductId = dbo.OrderItems.ProductId
+
+join Orders
+on dbo.OrderItems.OrderId=dbo.Orders.OrderId
+
+join Customer
+on dbo.Customer.Customer_id=dbo.Orders.Customer_id;
+
+
+
+OrderId	ProductName	FirstName	LastName	Phone	City	OrderDate
+301	Mobile	suresh	raina	9878788888	Bnagalore	2022-01-21 15:45:51.000
+305	Television	rahul	kl	9454656677	buenan	2019-11-09 14:23:45.000
+306	Television	virat	kohli	9454656677	Mysuru	2017-05-09 04:13:45.000
+304	Laptop	shikar	dhawan	9454678566	sydney	2009-11-11 13:23:45.000
+301	Mobile	suresh	raina	9878788888	Bnagalore	2022-01-21 15:45:51.000
+306	Television	virat	kohli	9454656677	Mysuru	2017-05-09 04:13:45.000
+309	Mobile	suresh	raina	9878788888	Bnagalore	2022-02-21 00:00:00.000
+309	Laptop	suresh	raina	9878788888	Bnagalore	2022-02-21 00:00:00.000
+301	Laptop	suresh	raina	9878788888	Bnagalore	2022-01-21 15:45:51.000
+301	Mobile	suresh	raina	9878788888	Bnagalore	2022-01-21 15:45:51.000
+310	Mobile	darshan	a	300074321	bengaluru	2022-02-21 12:21:55.000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10.Display the customerid whose name has substring ‘RA’
+
+select dbo.Customer.FirstName
+from dbo.Customer
+where dbo.Customer.FirstName like '%ra%';
+
+output:
+
+FirstName
+virat
+rahul

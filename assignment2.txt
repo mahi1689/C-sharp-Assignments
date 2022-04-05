@@ -1,0 +1,205 @@
+1)Display the details from Customer table who is from country Germany
+
+
+select * from dbo.Customer where Country='Germany';
+
+output:
+Customer_id	FirstName	LastName	City	Country	Phone	Fax_number
+107	michael	m	Berlin	Germany	753568566	NULL
+108	sundar	k	Berlin	Germany	653568566	65788888
+
+
+
+
+2)Display the  fullname of the employee  
+
+select concat(FirstName,LastName)as Full_Name 
+from dbo.Customer
+
+output:
+
+Full_Name
+sureshraina
+viratkohli
+rahulkl
+shikardhawan
+dhonims
+shiplam
+michaelm
+
+
+3)Display the  customer details  who has Fax number
+
+select * from dbo.Customer where Fax_number!='';
+
+output:
+Customer_id	FirstName	LastName	City	Country	Phone	Fax_number
+101	suresh	raina	Bnagalore	India	9878788888	554565899
+108	sundar	k	Berlin	Germany	653568566	65788888
+109	james	anderson	chennai	India	-74291	5674555
+110	darshan	a	bengaluru	India	300074321	555674555
+
+
+
+
+
+4)display the customer details whoes name holds second letter as U
+
+select *
+from dbo.Customer
+where FirstName like '_u%';
+
+output:
+
+Customer_id	FirstName	LastName	City	Country	Phone	Fax_number
+101	suresh	raina	Bnagalore	India	9878788888	554565899
+108	sundar	k	Berlin	Germany	653568566	65788888
+
+
+
+5)select order Details where unit price is greater than 10 and less than 20
+
+select   * from dbo.Orders join dbo.OrderItems
+on dbo.Orders.OrderId=dbo.OrderItems.OrderId
+where Unitprice > 10000 and Unitprice<20000;
+
+output:
+
+OrderId	OrderDate	OrderNumber	Customer_id	TotalAmount	OrderItemId	OrderId	ProductId	Unitprice	Quantity
+306	2017-05-09 04:13:45.000	ord6	102	60000	403	306	203	18000.00	2000
+306	2017-05-09 04:13:45.000	ord6	102	60000	406	306	201	16000.00	6300
+
+
+
+
+
+6)Display order details which contains shipping date and arrange the order by date
+
+
+select * from dbo.Orders join dbo.OrderItems
+on dbo.Orders.OrderId=dbo.OrderItems.OrderId
+order by OrderDate Asc;
+
+output:
+
+OrderId	OrderDate	OrderNumber	Customer_id	TotalAmount	OrderItemId	OrderId	ProductId	Unitprice	Quantity
+304	2009-11-11 13:23:45.000	ord4	104	20000	404	304	205	34000.00	500
+306	2017-05-09 04:13:45.000	ord6	102	60000	403	306	203	18000.00	2000
+306	2017-05-09 04:13:45.000	ord6	102	60000	406	306	201	16000.00	6300
+305	2019-11-09 14:23:45.000	ord5	103	78000	402	305	203	38000.00	1000
+301	2022-01-21 15:45:51.000	ord1	101	50000	401	301	204	50000.00	100
+301	2022-01-21 15:45:51.000	ord1	101	50000	405	301	206	96000.00	5800
+
+
+
+
+
+7)Print the orders shipped by ship name 'La corne d'abondance' between 2 dates(Choose dates of your choice)
+
+select dbo.Product.ProductName,dbo.Product.Package,dbo.Orders.OrderDate
+from dbo.Product join dbo.OrderItems
+on dbo.Product.ProductId = dbo.OrderItems.ProductId
+
+join Orders
+on dbo.OrderItems.OrderId=dbo.Orders.OrderId
+where dbo.Orders.OrderDate between '2019-05-20 11:23:45'  and '2022-04-28 10:21:30' ;
+
+output:
+
+ProductName	Package	OrderDate
+Mobile	dtdc	2022-01-21 15:45:51.000
+Television	Safe express	2019-11-09 14:23:45.000
+Mobile	dtdc	2022-01-21 15:45:51.000
+Mobile	dtdc	2022-02-21 00:00:00.000
+Laptop	Fast courier	2022-02-21 00:00:00.000
+Laptop	Fast courier	2022-01-21 15:45:51.000
+Mobile	dtdc	2022-01-21 15:45:51.000
+
+
+
+
+
+8)Print the products supplied by 'Exotic Liquids'
+
+select * from dbo.Product where dbo.Product.Package='dtdc';
+
+output:
+
+ProductId	ProductName	Unitprice	Package	IsDiscontinued
+201	Television	30000.00	dtdc	0
+204	Mobile	35000.00	dtdc	1
+206	Mobile	40000.00	dtdc	1
+
+
+9)print the average quantity ordered for every product
+
+select Avg(dbo.OrderItems.Quantity) as Average_for_every_product
+from dbo.OrderItems;
+
+output:
+
+Average_for_every_product
+2616
+
+
+
+10) Print all the Shipping company name and the ship names if they are operational
+
+select dbo.Product.Package from dbo.Product where IsDiscontinued=1;
+output:
+
+Package
+Safe express
+dtdc
+dtdc
+
+
+
+11)Print all Employees with Manager Name
+
+select concat(FirstName,' ',LastName) as 'employee name with manager name' from  dbo.Customer;
+
+output:
+
+employee name with manager name
+suresh raina
+virat kohli
+rahul kl
+shikar dhawan
+dhoni ms
+shipla m
+michael m
+sundar k
+
+
+
+12)Print the bill for a given order id .bill should contain Productname, Categoryname,price after discount
+
+
+
+select dbo.Product.ProductName,dbo.Product.ProductId, dbo.Product.Unitprice as  Price_before_discount,dbo.Product.Unitprice-(dbo.Product.Unitprice)/10  as Price_after_Discount_10percent_discount
+from dbo.Product join dbo.OrderItems
+on dbo.Product.ProductId=dbo.OrderItems.ProductId
+where dbo.Product.ProductId=205 ; 
+
+output:
+
+ProductName	ProductId	Price_before_discount	Price_after_Discount_10percent_discount
+Laptop	205	70000.00	63000.000000
+
+
+
+
+13)Print the Total price of orders which have the products supplied by 'Exotic Liquids' if the price is > 50 and also print it by Shipping company's Name
+
+
+select sum(dbo.OrderItems.Unitprice) as Totalprice_of_orders_supplied_by_dtdc
+from dbo.OrderItems join dbo.Product
+on dbo.OrderItems.ProductId=dbo.Product.ProductId
+where dbo.Product.Package='dtdc';
+
+output:
+
+Totalprice_of_orders_supplied_by_dtdc
+162000.00
+

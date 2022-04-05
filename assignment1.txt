@@ -1,0 +1,122 @@
+use Batch_1702B;
+
+
+
+1.Desgin the above database with following table by applying Primary key and Foreign key
+
+create table Orders (
+OrderId int primary key,
+OrderDate datetime not null,
+OrderNumber nvarchar(10),
+Customer_id int,
+foreign key(Customer_id) references dbo.Customer(Customer_id)
+
+);
+
+create table OrderItems (
+OrderItemId int primary key,
+OrderId int,
+ProductId int,
+Unitprice decimal(12,2),
+Quantity int,
+foreign key(OrderId) references dbo.Orders(OrderId),
+foreign key(ProductId) references dbo.Product(ProductId));
+
+
+
+
+
+2.Insert Records in all tables 
+
+
+insert into dbo.Customer values(106,'shipla','m','Mumbai','India',7853568566);
+
+insert into dbo.Product values(203,'Television',50000,'Safe express',0);
+insert into dbo.Product values(202,'Air Cooler',25000,'Safe express',1);
+insert into dbo.Product values(206,'Mobile',40000,'dtdc',1);
+insert into dbo.Product values(205,'Laptop',70000,'Fast courier',0);
+
+insert into dbo.Orders values(301,'2022-01-21 15:45:51','ord1',101,50000);
+insert into dbo.Orders values(306,'2017-05-09 04:13:45','ord6',102,60000);
+
+insert into dbo.OrderItems values(401,301,204,50000,100);
+
+insert into dbo.OrderItems values(406,306,201,16000,6300);
+
+
+
+
+
+
+
+3.In Customer table FirstName Attribute should not accept null value
+
+
+
+insert into dbo.Orders(OrderId,OrderNumber,Customer_id,TotalAmount)   values(309,'ord6',102,60000);
+
+output:
+Msg 515, Level 16, State 2, Line 3
+Cannot insert the value NULL into column 'OrderDate', table 'Batch_1702B.dbo.Orders'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+
+
+
+4.In Order table OrderDate should not accept null value
+
+
+insert into dbo.Customer(Customer_id,LastName,Country,City,Phone) values(107,'m','India','Mumbai',7853568566);
+
+
+output:
+
+Msg 515, Level 16, State 2, Line 11
+Cannot insert the value NULL into column 'FirstName', table 'Batch_1702B.dbo.Customer'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+
+
+
+5.Display all customer details
+
+select * from Customer;
+
+output:
+
+Customer_id	FirstName	LastName	City	Country	Phone
+101	suresh	raina	Bnagalore	India	9878788888
+102	virat	kohli	Mysuru	India	9454656677
+103	rahul	kl	buenan	argentina	9454656677
+104	shikar	dhawan	sydney	australia	9454678566
+105	dhoni	ms	ireland	dublin	9453568566
+106	shipla	m	India	Mumbai	7853568566
+
+
+
+
+6.write a query to display Country whose name starts with A or I
+
+select Country
+from dbo.Customer
+where Country like '[a or I]%';
+output:
+
+Country
+India
+India
+argentina
+australia
+ireland
+
+
+
+7 .write a query to display whose name of customer whose third character is i
+
+select *
+from dbo.Customer
+where FirstName like '__i%';
+
+output:
+
+Customer_id	FirstName	LastName	City	Country	Phone
+104	shikar	dhawan	sydney	australia	9454678566
+106	shipla	m	India	Mumbai	7853568566
