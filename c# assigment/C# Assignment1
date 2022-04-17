@@ -1,0 +1,255 @@
+1.Write a Simple console Application Calculator with the help of Visual Studio .NET IDE which will perform following operations on two numbers:
+a.Addition.
+b.Subtraction.
+c.Multiplication.
+d.Division
+Accept input from user and display results on console. Make use of loops, switch case wherever required.
+
+
+
+using System;
+
+public class calci
+{
+    static public void Main ()
+    {
+        Console.WriteLine("Calculator:");
+        Console.WriteLine("1.Addition");
+        Console.WriteLine("2.Subtraction");
+        Console.WriteLine("3.Multiplication");
+        Console.WriteLine("4.Division");
+        int n= int.Parse(Console.ReadLine());
+        int a,b,c;
+        switch (n)
+        {
+        case 1:  Console.WriteLine("Enter number 1:");
+                 a= Convert.ToInt32(Console.ReadLine());
+                 Console.WriteLine("Enter number 2:");
+                 b= Convert.ToInt32(Console.ReadLine());
+                 c=a+b;
+                  Console.WriteLine("total :"+c);
+                 break;
+        
+        
+        case 2:  Console.WriteLine("Enter number 1:");
+                 a= Convert.ToInt32(Console.ReadLine());
+                 Console.WriteLine("Enter number 2:");
+                 b= Convert.ToInt32(Console.ReadLine());
+                 c=a-b;
+                  Console.WriteLine("total :"+c);
+                 break;
+        
+        
+        case 3:  Console.WriteLine("Enter number 1:");
+                 a= Convert.ToInt32(Console.ReadLine());
+                 Console.WriteLine("Enter number 2:");
+                 b= Convert.ToInt32(Console.ReadLine());
+                  c=a*b;
+                Console.WriteLine("total :"+c);
+                 break;
+        
+        
+        case 4:  Console.WriteLine("Enter number 1:");
+                 a= Convert.ToInt32(Console.ReadLine());
+                 Console.WriteLine("Enter number 2:");
+                 b= Convert.ToInt32(Console.ReadLine());
+                 c=a/b;
+                 Console.WriteLine("total :"+c);
+                 break;
+        
+        
+        default:
+                Console.WriteLine("Not found");
+                break;
+        
+        
+        
+    }
+       
+        
+        
+    }
+
+}
+
+
+2.Accept average marks of five students. Display the highest marks obtained.
+
+
+using System;
+
+public class highest
+{
+    static public void Main ()
+    {
+        int high=0;
+     int[] a= new int[5]{20,110,30,215,600};
+     for( int i=0;i<a.Length;i++)
+     {
+         if(a[i]>high)
+         {
+         high=a[i];
+         
+         }
+     }
+     Console.WriteLine("Highest is : "+high);
+    }
+
+}
+
+
+3.Write a static method to accept param array of integers. The method should find the sum of all the integers passed and display the result. Write a client program to call the method.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+
+namespace ConsoleApplication2
+{
+     internal class Program
+    {
+       public static int display(int[] ar)
+        {
+           int sum=0;
+             for(int i=0;i<ar.Length;i++)
+                 {
+            sum=sum+ar[i];
+           
+                 }
+                 return sum;
+           
+        }
+    
+         static void Main(String[] args)
+            {
+              int[] ar= new int[5];
+               int sum=0;
+
+      
+            Console.WriteLine("Enter 5 integers:");
+           for(int i=0;i<ar.Length;i++)
+              {
+                     Console.WriteLine("Number {0}:",i);
+                     ar[i]=Convert.ToInt32(Console.ReadLine());
+              }
+
+                Console.WriteLine("Sum is {0} :",display(ar));
+        
+        }
+    }
+    
+}
+
+
+
+
+
+
+
+
+4.Write a method to swap two integers. The client code should call the method and print the swapped value.
+
+using System;
+
+public class swap
+{
+    static public void Main ()
+    {
+        swa s = new swa();
+        s.swapp(18,76);
+    
+    }
+}
+    
+    class swa
+    {
+       // int a,b;
+    public void swapp(int a, int b){
+         int temp= a;
+         a=b;
+         b=temp;
+     
+     Console.WriteLine("Swapped value is : "+a +" and " +b);
+     
+     }
+    
+}
+
+5.Write a single method that calculates the area and circumference of the circle. The area and circumference should be displayed through the client code
+
+using System;
+
+public class circle
+{
+    static public void Main ()
+    {
+
+    arc a= new arc();
+    a.area();
+    }
+
+}
+ 
+ class arc
+ {
+     public void area()
+     {
+         
+        double pi=3.14, r=5;
+       double a=pi*r*r;
+        double b=2*pi*r;
+        Console.WriteLine(" Area of circle:"+a);
+        Console.WriteLine("Circumference of circl : " +b);
+        
+     }
+ }
+ 
+ 
+ 
+ 6.Create a structure Book which contains the following members:
+bookId, title, price, bookType
+Type of the book should an enumerated data type with values as Magazine, Novel, ReferenceBook, Miscellaneous. Write a console based application to do the following tasks.
+a.Accept the details of the book
+b.Display the details of the book. The type of book should be displayed as a string e.g.:
+Magazine
+Note: Use methods for accepting and displaying details.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
+struct Book
+{
+    public int bookId;
+    public String title;
+    public String bokType;
+
+}
+
+enum bookType { Magazine, Novel, ReferenceBook, Miscellaneous };
+namespace WindowsFormsApplication2
+{
+     class Program
+    {
+        
+        static void Main()
+        {
+            Book b1;
+            b1.bookId = 101;
+            b1.title = "Sunrise";
+            b1.bokType = Convert.ToString(bookType.Magazine);
+
+            Console.WriteLine("Book Id is {0}", b1.bookId);
+            Console.WriteLine("Book Title is :{0}", b1.title);
+            Console.WriteLine("Book Type is : {0}", b1.bokType);
+           
+        }
+    }
+}
+
+ 

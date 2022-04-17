@@ -1,0 +1,596 @@
+//1.Employeemgmt console applications
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Employeemgmt
+{
+    interface IPrintable
+    {
+         double getDetails(double Salary);
+         double getGrossSal();
+         void CalculateSalary();
+
+    }
+
+    class Program : IPrintable
+    {
+        private int EmpNo = 0;
+        private string EmpName = null;
+        private double Salary = 0;
+        private double HRA = 0;
+        private double TA = 0;
+        private double DA = 0;
+        private double PF = 0;
+        private double TDS = 0;
+        private double NetSalary = 0;
+        private double GrossSalary = 0;
+
+
+      
+
+
+
+        public double getDetails(double Salary)
+        {
+            if (Salary < 5000)
+            {
+                HRA = (Salary) / 10;
+                Console.WriteLine("HRA is :" + HRA);
+                TA = (Salary) / 5;
+                Console.WriteLine("TA is :" + TA);
+                DA = (Salary) / 15;
+                Console.WriteLine("DA is :" + DA);
+                GrossSalary = Salary + HRA + TA + DA;
+                Console.WriteLine("Gross Salary is :" + GrossSalary);
+
+                return GrossSalary;
+            }
+
+            else if (Salary < 10000)
+            {
+                HRA = (Salary) / 15;
+                Console.WriteLine("HRA is :" + HRA);
+                TA = (Salary) / 10;
+                Console.WriteLine("TA is :" + TA);
+                DA = (Salary) / 20;
+                Console.WriteLine("DA is :" + DA);
+                GrossSalary = Salary + HRA + TA + DA;
+                Console.WriteLine("Gross Salary is :" + GrossSalary);
+                return GrossSalary;
+            }
+
+            else if (Salary < 15000)
+            {
+                HRA = (Salary) / 20;
+                Console.WriteLine("HRA is :" + HRA);
+                TA = (Salary) / 15;
+                Console.WriteLine("TA is :" + TA);
+                DA = (Salary) / 25;
+                Console.WriteLine("DA is :" + DA);
+                GrossSalary = Salary + HRA + TA + DA;
+                Console.WriteLine("Gross Salary is :" + GrossSalary);
+                return GrossSalary;
+            }
+            else if (Salary < 20000)
+            {
+                HRA = (Salary) / 25;
+                Console.WriteLine("HRA is :" + HRA);
+                TA = (Salary) / 20;
+                Console.WriteLine("TA is :" + TA);
+                DA = (Salary) / 30;
+                Console.WriteLine("DA is :" + DA);
+                GrossSalary = Salary + HRA + TA + DA;
+                Console.WriteLine("Gross Salary is :" + GrossSalary);
+                return GrossSalary;
+            }
+
+            else
+            {
+                HRA = (Salary) / 30;
+                Console.WriteLine("HRA is :" + HRA);
+                TA = (Salary) / 25;
+                Console.WriteLine("TA is :" + TA);
+                DA = (Salary) / 35;
+                Console.WriteLine("DA is :" + DA);
+                GrossSalary = Salary + HRA + TA + DA;
+                Console.WriteLine("Gross Salary is :" + GrossSalary);
+                return GrossSalary;
+            }
+          //  Console.WriteLine("Empid= " + EmpNo + " " + "EmpName is :" + EmpName + " " + "Emp Salary is " + Salary + " " + "HRA is " + HRA + " " + "PF IS " + PF + " " + "TDS is " + TDS);
+
+        }
+
+        public double getGrossSal()
+        {
+            Console.WriteLine("Gross sal=" + GrossSalary);
+            return GrossSalary;
+        }
+
+        public virtual void CalculateSalary()
+        {
+
+            PF = (GrossSalary) / 10;
+            TDS = (GrossSalary) / 18;
+            NetSalary = (GrossSalary) - (PF + TDS);
+            Console.WriteLine("PF is:" + PF + " " + "TDS is:" + TDS + " " + "NetSalary is:" + NetSalary);
+        }
+
+
+
+        class Manager : Program
+        {
+            private double petrol_allowance;
+            private double food_allowance;
+            private double other_allowance;
+
+            public  double getpetrolallowance(double Salary)
+            {
+                petrol_allowance = (Salary) / 8;
+                food_allowance = (Salary) / 13;
+                other_allowance = (Salary) / 3;
+                //getGrossSal();
+                GrossSalary = Salary + HRA + TA + DA + petrol_allowance + food_allowance + other_allowance;
+                Console.WriteLine("                               ");
+                Console.WriteLine("Petrol allowance for  Manager is :" + petrol_allowance);
+                Console.WriteLine("Food allowance for  Manager is :" + food_allowance);
+                Console.WriteLine("Other allowance for  Manager is :" + other_allowance);
+                Console.WriteLine("Gross salary of Manager is :" + GrossSalary);
+                return GrossSalary;
+            }
+
+            public override void CalculateSalary()
+            {
+               // Program p = new Program();
+                //p.CalculateSalary();
+                PF = (GrossSalary) / 10;
+                TDS = (GrossSalary) / 18;
+                NetSalary = (GrossSalary) - (PF + TDS);
+                Console.WriteLine("PF is:" + PF + " " + "TDS is:" + TDS + " " + "NetSalary is:" + NetSalary);
+              
+            }
+
+        }
+
+
+
+        class MarketingExecutive : Program
+        {
+            private double kilo_mtr_travel;
+            private double tour_allowances;
+            private double telephone_allowance;
+
+            public double getTourAllow(double Salary)
+            {
+                Console.WriteLine("                               ");
+                Console.WriteLine("Tour Allowances");
+                Console.WriteLine("Enter total kilometer travel:");
+                kilo_mtr_travel = Convert.ToDouble(Console.ReadLine());
+                tour_allowances = (kilo_mtr_travel) / 5;
+                Console.WriteLine("Tour allowances for Marketing Exexcutive is :" + tour_allowances);
+                telephone_allowance = 1000;
+              
+                GrossSalary = Salary + HRA + TA + DA + kilo_mtr_travel + tour_allowances + telephone_allowance;
+               
+                Console.WriteLine("Gross salary of Marketing Exexcutive is :" + GrossSalary);
+                return GrossSalary;
+
+            }
+
+            public override void CalculateSalary()
+            {
+               // Program p = new Program();
+               // p.CalculateSalary();
+                PF = (GrossSalary) / 10;
+                TDS = (GrossSalary) / 18;
+                NetSalary = (GrossSalary) - (PF + TDS);
+                Console.WriteLine("Marketing Executive:");
+                Console.WriteLine("PF is:" + PF + " " + "TDS is:" + TDS + " " + "NetSalary is:" + NetSalary);
+              
+            }
+
+        }
+
+
+        static void Main(string[] args)
+        {
+            int EmpNo;
+            String EmpName;
+            double Salary;
+            Program p = new Program();
+            Console.WriteLine("Enter Employee ID:");
+            EmpNo = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter EmpName:");
+            EmpName = Console.ReadLine();
+
+            Console.WriteLine("Enter Salary:");
+            Salary = Convert.ToDouble(Console.ReadLine());
+            p.getDetails(Salary);
+            p.getGrossSal();
+
+
+            Manager m = new Manager();
+            m.getpetrolallowance(Salary);
+            m.CalculateSalary();
+
+            MarketingExecutive me = new MarketingExecutive();
+            me.getTourAllow(Salary);
+            me.CalculateSalary();
+        }
+    }
+
+}
+
+
+
+
+
+
+2.  "MyStack"
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace MyStack
+{
+    class Program
+    {
+
+        private int[] ele;
+        private int top;
+        private int max;
+        public Program(int size)
+        {
+            ele = new int[size];
+            top = -1;
+            max = size;
+        }
+
+        public void push(int item)
+        {
+            if (top == max - 1)
+            {
+                Console.WriteLine("Stack Overflow");
+                return;
+            }
+            else
+            {
+                ele[++top] = item;
+            }
+        }
+
+        public int pop(int top)
+        {
+            if (top == -1)
+            {
+                Console.WriteLine("Stack Underflow");
+                return -1;
+            }
+            else
+            {
+                Console.WriteLine("Poped element is: " + ele[top]);
+                return ele[top--];
+            }
+        }
+
+        public void printStack()
+        {
+            if (top == -1)
+            {
+                Console.WriteLine("Stack is Empty");
+                return;
+            }
+            else
+            {
+                for (int i = 0; i <= top; i++)
+                {
+                    Console.WriteLine("Item[" + (i + 1) + "]: " + ele[i]);
+                }
+            }
+        }
+
+
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the size of array:");
+            int n = Convert.ToInt32(Console.ReadLine());
+            Program p = new Program(n);
+
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Enter the elements to stack {0}", i);
+                int m = Convert.ToInt32(Console.ReadLine());
+                p.push(m);
+            }
+            //Console.WriteLine("Topped Element is:"+top);
+
+            Console.WriteLine("Stack Elements are : ");
+            p.printStack();
+
+
+
+
+            Console.WriteLine("Enter the position of stack to pop ");
+            int pos = Convert.ToInt32(Console.ReadLine());
+            p.pop(pos);
+        }
+    }
+}
+
+
+
+
+part2: stack program
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace MyStack
+{
+    class Program
+    {
+
+       int[] ele;
+         int top;
+         int max;
+
+         public Program(int size)
+         {
+             ele = new int[size];
+             top = -1;
+             max = size;
+         }
+
+
+
+
+
+         public static void Main(string[] args)
+         {
+             int choice;
+             Console.WriteLine("Enter the size of array:");
+             int n = Convert.ToInt32(Console.ReadLine());
+             Program p = new Program(n);
+
+             do
+             {
+                 Console.WriteLine("1.push 2.pop  3.display  4.exit");
+                  choice = Convert.ToInt32(Console.ReadLine());
+                 
+                 switch (choice)
+                 {
+                     case 1:
+                         p.push();
+                         break;
+                     case 2:
+                         p.pop();
+                         break;
+
+                     case 3:
+                         p.display();
+                         break;
+                     case 4: break;
+                 }
+             } while (choice != 5);
+         }
+
+
+         public void push()
+           {
+            if (top == max - 1)
+            {
+                Console.WriteLine("Stack Overflow");
+                
+            }
+            else
+            {
+              Console.WriteLine(" Enter a value to be pushed:");
+              int val = Convert.ToInt32(Console.ReadLine());
+              top++;
+                ele[top] = val;
+                
+                
+            }
+        }
+
+        public void pop()
+        {
+            if (top == max-1)
+            {
+                Console.WriteLine("Stack Underflow");
+                
+            }
+            else
+            {
+                Console.WriteLine("Popped element is: " + ele[top]);
+                 top--;
+            }
+        }
+
+        public void display()
+        {
+            if (top >= max-1)
+            {
+                Console.WriteLine("Stack is Empty");
+                return;
+            }
+            else
+            {
+                for (int i = 0; i <= top; i++)
+                {
+                    Console.WriteLine("Item[" + (i + 1) + "]: " + ele[i]);
+                }
+            }
+        }
+   
+
+
+            //Console.WriteLine("Topped Element is:"+top);
+
+          /*  Console.WriteLine("Stack Elements are : ");
+            p.printStack();
+
+
+
+
+            Console.WriteLine("Enter the position of stack to pop ");
+            int pos = Convert.ToInt32(Console.ReadLine());
+            p.pop(pos);*/
+        }
+    }
+
+
+
+
+
+//stack with custom exception
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace MyStack
+{
+    class Program
+    {
+
+       int[] ele;
+         int top;
+         int max;
+
+         public Program(int size)
+         {
+             ele = new int[size];
+             top = -1;
+             max = size;
+         }
+
+
+
+
+
+         public static void Main(string[] args)
+         {
+             int choice;
+             Console.WriteLine("Enter the size of array:");
+             int n = Convert.ToInt32(Console.ReadLine());
+             Program p = new Program(n);
+
+             do
+             {
+                 Console.WriteLine("1.push 2.pop  3.display  4.exit");
+                  choice = Convert.ToInt32(Console.ReadLine());
+                 
+                 switch (choice)
+                 {
+                     case 1:
+                         p.push();
+                         break;
+                     case 2:
+                         p.pop();
+                         break;
+
+                     case 3:
+                         p.display();
+                         break;
+                     case 4: 
+                         break;
+                 }
+             } while (choice != 4);
+         }
+
+
+         public void push()
+           {
+            if (top == max - 1)
+            {
+                try
+                {
+                    throw new StackOverFlowException("Stack Custom exception");
+                }
+                catch (StackOverFlowException e) { Console.WriteLine(e.Message); }
+            }
+            else
+            {
+              Console.WriteLine(" Enter a value to be pushed:");
+              int val = Convert.ToInt32(Console.ReadLine());
+              top++;
+                ele[top] = val;
+                
+                
+            }
+        }
+
+        public void pop()
+        {
+            if (top <= -1)
+            {
+                try
+                {
+                    throw new StackUnderFlowException("Stack UnderFlow Exception");
+                }
+                catch (StackUnderFlowException c) { Console.WriteLine(c.Message); }
+                //Console.WriteLine("Stack Underflow");
+                
+            }
+            else
+            {
+                Console.WriteLine("Popped element is: " + ele[top]);
+                 top--;
+            }
+        }
+
+        public void display()
+        {
+            if (top >= 0)
+            {
+
+                for (int i = 0; i <= top; i++)
+                {
+                    Console.WriteLine("Item[" + (i + 1) + "]: " + ele[i]);
+                }
+               
+            }
+            else
+            {
+                Console.WriteLine("Stack is Empty");
+                return;
+            }
+        }
+
+
+
+        class StackOverFlowException : Exception
+        {
+           
+            public StackOverFlowException(string msg):base(msg)
+            {
+
+            }
+        }
+
+        class StackUnderFlowException : Exception
+        {
+           
+            public StackUnderFlowException(string msg): base(msg)
+            {
+
+            }
+        }
+
+
+
+        }
+    }
+
+
+

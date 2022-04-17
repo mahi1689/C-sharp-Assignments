@@ -1,0 +1,125 @@
+using System;
+
+delegate double ManagerDetails(double n);
+namespace DelegateAppl
+{
+ class three
+ {
+ static double num = 0;
+ public static double PetrolAllowance(double p)
+ {
+ num += (p)/8;
+ return num;
+ }
+ 
+ public static double FoodAllowance(double q)
+ {
+ num *= (q)/15;
+ return num;
+ }
+ 
+  
+ public static double OtherAllowance(double r)
+ {
+ num *= (r)/3;
+ return num;
+ } 
+ 
+ public static double getNum()
+ {
+ return num;
+ }
+ 
+ static void Main(string[] args)
+ {
+ //create delegate instances
+ ManagerDetails nc1 = new ManagerDetails(PetrolAllowance);
+ ManagerDetails nc2 = new ManagerDetails(FoodAllowance);
+ 
+ ManagerDetails  nc3 = new ManagerDetails(OtherAllowance);
+ 
+ nc1(50000);
+ Console.WriteLine("Petrol Allowance for Manager: {0}", getNum());
+ 
+ nc2(50000);
+ Console.WriteLine("Food Allowance for Manager: {0}", getNum());
+ 
+ nc3(50000);
+ Console.WriteLine("Other Allowance for Manager: {0}", getNum());
+ 
+ 
+ Console.ReadKey();
+    
+
+}
+    }
+
+}
+
+
+
+
+
+2.MultiCast delegate
+
+using System;
+
+delegate double ManagerDetails(double n);
+namespace DelegateAppl
+{
+ class four
+ {
+ static double num = 0;
+ public static double PetrolAllowance(double p)
+ {
+ num += (p)/8;
+ return num;
+ }
+ 
+ public static double FoodAllowance(double q)
+ {
+ num *= (q)/15;
+ return num;
+ }
+ 
+  
+ public static double OtherAllowance(double r)
+ {
+ num *= (r)/3;
+ return num;
+ } 
+ 
+ public static double getNum()
+ {
+ return num;
+ }
+ 
+ static void Main(string[] args)
+ {
+ //create delegate instances
+ ManagerDetails nc1 = new ManagerDetails(PetrolAllowance);
+ ManagerDetails nc2 = new ManagerDetails(FoodAllowance);
+ 
+ ManagerDetails  nc3 = new ManagerDetails(OtherAllowance);
+ 
+ ManagerDetails n;
+ //n=nc1;
+ n=nc1+nc2+nc3;
+ 
+ n(50);
+ Console.WriteLine(" Allowance for Manager: {0}", getNum());
+ 
+ /*nc2(50000);
+ Console.WriteLine("Food Allowance for Manager: {0}", getNum());
+ 
+ nc3(50000);
+ Console.WriteLine("Other Allowance for Manager: {0}", getNum());
+ */
+ 
+ Console.ReadKey();
+    
+
+}
+    }
+
+}

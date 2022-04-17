@@ -1,0 +1,291 @@
+
+//class1.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace LitwareLib
+{
+     public class Class1
+    {
+        private int EmpNo = 0;
+        private string EmpName = null;
+        private double Salary = 0;
+        private double HRA = 0;
+        private double TA = 0;
+        private double DA = 0;
+        private double PF = 0;
+        private double TDS = 0;
+        private double NetSalary = 0;
+        private double GrossSalary = 0;
+
+       
+
+
+
+        public void getInfo()
+        {
+            Console.WriteLine("Enter Employee ID:");
+            EmpNo = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter EmpName:");
+            EmpName = Console.ReadLine();
+
+            Console.WriteLine("Enter Salary:");
+            Salary = Convert.ToDouble(Console.ReadLine());
+        }
+
+
+
+        public double getDetails(double Salary)
+        {
+            if (Salary < 5000)
+            {
+                HRA = (Salary) / 10;
+                Console.WriteLine("HRA is :" + HRA);
+                TA = (Salary) / 5;
+                Console.WriteLine("TA is :" + TA);
+                DA = (Salary) / 15;
+                Console.WriteLine("DA is :" + DA);
+                GrossSalary = Salary + HRA + TA + DA;
+                Console.WriteLine("Gross Salary is :" + GrossSalary);
+
+                return GrossSalary;
+            }
+
+            else if (Salary < 10000)
+            {
+                HRA = (Salary) / 15;
+                Console.WriteLine("HRA is :" + HRA);
+                TA = (Salary) / 10;
+                Console.WriteLine("TA is :" + TA);
+                DA = (Salary) / 20;
+                Console.WriteLine("DA is :" + DA);
+                GrossSalary = Salary + HRA + TA + DA;
+                Console.WriteLine("Gross Salary is :" + GrossSalary);
+                return GrossSalary;
+            }
+
+            else if (Salary < 15000)
+            {
+                HRA = (Salary) / 20;
+                Console.WriteLine("HRA is :" + HRA);
+                TA = (Salary) / 15;
+                Console.WriteLine("TA is :" + TA);
+                DA = (Salary) / 25;
+                Console.WriteLine("DA is :" + DA);
+                GrossSalary = Salary + HRA + TA + DA;
+                Console.WriteLine("Gross Salary is :" + GrossSalary);
+                return GrossSalary;
+            }
+            else if (Salary < 20000)
+            {
+                HRA = (Salary) / 25;
+                Console.WriteLine("HRA is :" + HRA);
+                TA = (Salary) / 20;
+                Console.WriteLine("TA is :" + TA);
+                DA = (Salary) / 30;
+                Console.WriteLine("DA is :" + DA);
+                GrossSalary = Salary + HRA + TA + DA;
+                Console.WriteLine("Gross Salary is :" + GrossSalary);
+                return GrossSalary;
+            }
+
+            else
+            {
+                HRA = (Salary) / 30;
+                Console.WriteLine("HRA is :" + HRA);
+                TA = (Salary) / 25;
+                Console.WriteLine("TA is :" + TA);
+                DA = (Salary) / 35;
+                Console.WriteLine("DA is :" + DA);
+                GrossSalary = Salary + HRA + TA + DA;
+                Console.WriteLine("Gross Salary is :" + GrossSalary);
+                return GrossSalary;
+            }
+            Console.WriteLine("Empid= " + EmpNo + " " + "EmpName is :" + EmpName + " " + "Emp Salary is " + Salary + " " + "HRA is " + HRA + " " + "PF IS " + PF + " " + "TDS is " + TDS);
+
+        }
+
+        public double getGrossSal()
+        {
+            Console.WriteLine("Gross sal=" + GrossSalary);
+            return GrossSalary;
+        }
+         
+        public void CalculateSalary()
+        {
+
+            PF = (GrossSalary) / 10;
+            TDS = (GrossSalary) / 18;
+            NetSalary = (GrossSalary) - (PF + TDS);
+            Console.WriteLine("PF is:" + PF + " " + "TDS is:" + TDS + " " + "NetSalary is:" + NetSalary);
+        }
+            
+    }
+}
+
+
+
+
+
+//add test case in class1.cs file
+
+
+            Class1 c = new Class1();
+            c.getInfo();
+            c.getDetails();
+            c.getGrossSal();
+            c.CalculateSalary();
+
+
+//console appplication  "ReghrEmp"
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using LitwareLib;
+
+
+namespace ReghrEmp 
+{
+    public class Program 
+    {
+        static void Main(string[] args)
+        {
+            //Program p = new Program();
+           // p.getGrossSal();
+
+            
+           
+            int EmpNo = 0;
+            string EmpName;
+            double Salary = 0;
+            Console.WriteLine("New Employee Registration");
+
+            Console.WriteLine("Enter Employee ID:");
+            EmpNo = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter EmpName:");
+            EmpName = Console.ReadLine();
+
+            Console.WriteLine("Enter Salary:");
+            Salary = Convert.ToDouble(Console.ReadLine());
+
+
+            Class1 c = new Class1();
+            double gross = c.getDetails(Salary);
+
+
+            //Console.WriteLine("Gross Salary:"+gross);
+            //Console.WriteLine("Empid= " + EmpNo + " " + "EmpName is :" + EmpName + " " + "Emp Salary is " + Salary + " " + "HRA is " + HRA + " " + "PF IS " + PF + " " + "TDS is " + TDS);
+        }
+    }
+}
+
+
+
+
+3.Programtest
+
+
+
+
+using ReghrEmp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using LitwareLib;
+using ReghrEmp;
+
+namespace TestProject1
+{
+    
+    
+    /// <summary>
+    ///This is a test class for ProgramTest and is intended
+    ///to contain all ProgramTest Unit Tests
+    ///</summary>
+    [TestClass()]
+    public class ProgramTest
+    {
+
+
+        private TestContext testContextInstance;
+
+        /// <summary>
+        ///Gets or sets the test context which provides
+        ///information about and functionality for the current test run.
+        ///</summary>
+        public TestContext TestContext
+        {
+            get
+            {
+                return testContextInstance;
+            }
+            set
+            {
+                testContextInstance = value;
+            }
+        }
+
+        #region Additional test attributes
+        // 
+        //You can use the following additional attributes as you write your tests:
+        //
+        //Use ClassInitialize to run code before running the first test in the class
+        //[ClassInitialize()]
+        //public static void MyClassInitialize(TestContext testContext)
+        //{
+        //}
+        //
+        //Use ClassCleanup to run code after all tests in a class have run
+        //[ClassCleanup()]
+        //public static void MyClassCleanup()
+        //{
+        //}
+        //
+        //Use TestInitialize to run code before running each test
+        //[TestInitialize()]
+        //public void MyTestInitialize()
+        //{
+        //}
+        //
+        //Use TestCleanup to run code after each test has run
+        //[TestCleanup()]
+        //public void MyTestCleanup()
+        //{
+        //}
+        //
+        #endregion
+
+
+        /// <summary>
+        ///A test for Program Constructor
+        ///</summary>
+        [TestMethod()]
+        public void ProgramConstructorTest()
+        {
+            Program target = new Program();
+            Assert.Inconclusive("TODO: Implement code to verify target");
+        }
+
+        /// <summary>
+        ///A test for Main
+        ///</summary>
+        [TestMethod()]
+        [DeploymentItem("ReghrEmp.exe")]
+        public void MainTest()
+        {
+            //double Salary;
+            
+            Class1 c = new Class1();
+            
+            c.getInfo();
+            c.getDetails(0);
+            c.getGrossSal();
+            c.CalculateSalary();
+        }
+    }
+}
